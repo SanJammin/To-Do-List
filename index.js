@@ -6,74 +6,70 @@ const info = document.getElementById("info");
 const characterCount = document.getElementById("character-count");
 
 function updateInfoMessage() {
-    if (taskList.children.length === 0) {
-        info.textContent = "No Tasks Yet";
-    } else {
-        info.textContent = "";
-    }
-};
+  info.textContent = taskList.children.length === 0 ? "No Tasks Yet" : "";
+}
+
 
 updateInfoMessage();
 
+task.addEventListener("input", () => {
+  const length = task.value.length;
+  characterCount.textContent = `${length}/30`;
+
+  if (length >= 25) {
+    characterCount.classList.add("warning");
+  } else {
+    characterCount.classList.remove("warning");
+  }
+});
+
+
 taskSubmitBtn.addEventListener("click", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (task.value == "") return;
+  if (task.value === "") return;
 
-    taskList.innerHTML += `
-    <li class="task-item task-enter">
-        <input class="submitted-task" type="checkbox" name="submitted-task">
-        <label for="submitted-task">
-            ${task.value}
-        </label>
-        <button type="button" class="delete-btn">
-            Delete
-        </button>
-    </li>
-    `;
+  // Create task element using DOM methods instead of innerHTML
+  const li = document.createElement("li");
+  li.className = "task-item task-enter";
 
-    const newTask = taskList.lastElementChild;
-    setTimeout(() => {
-        newTask.classList.remove("task-enter");
-    },10);
+  li.innerHTML = `
+    <input class="submitted-task" type="checkbox" name="submitted-task">
+    <label for="submitted-task">${task.value}</label>
+    <button type="button" class="delete-btn">Delete</button>
+  `;
 
-    task.value = "";
-    task.focus();
-    characterCount.textContent = "0/30"
-    updateInfoMessage();
+  taskList.appendChild(li);
+
+  setTimeout(() => li.classList.remove("task-enter"), 10);
+
+  task.value = "";
+  characterCount.textContent = "0/30";
+  task.focus();
+
+  updateInfoMessage();
 });
 
 taskList.addEventListener("click", (e) => {
-    if(e.target.classList.contains("delete-btn")) {
-        const li = e.target.closest("li");
-        li.classList.add("task-exit");
+  const li = e.target.closest("li");
 
-        setTimeout(() => {
-            li.remove();
-            updateInfoMessage();
-        }, 300);
-    }
+  if (e.target.classList.contains("delete-btn")) {
+    li.classList.add("task-exit");
 
-    if(e.target.classList.contains("submitted-task")) {
-        e.target.closest("li").classList.toggle("completed")
-    }
+    setTimeout(() => {
+      li.remove();
+      updateInfoMessage(); // only call once task is gone
+    }, 300);
+  }
 
-    updateInfoMessage();
-});
-
-task.addEventListener("input", () => {
-    const length = task.value.length;
-    characterCount.textContent = `${length}/30`;
-
-    if (length >= 25) {
-        characterCount.classList.add("warning");
-    } else {
-        characterCount.classList.remove("warning");
-    }
+  if (e.target.classList.contains("submitted-task")) {
+    li.classList.toggle("completed");
+  }
 });
 
 taskClearBtn.addEventListener("click", () => {
-    task.value = "";
-    taskList.innerHTML = "";
-    updateInfoMessage();
+  task.value = "";
+  taskList.innerHTML = "";
+  characterCount.textContent = "0/30";
+  updateInfoMessage();
 });
