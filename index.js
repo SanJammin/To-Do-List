@@ -18,31 +18,40 @@ updateInfoMessage();
 taskSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    if (task.value == "") {
-        return
-    } else {
-        taskList.innerHTML += `
-        <li class="task-item">
-            <input class="submitted-task" type="checkbox" name="submitted-task">
-            <label for="submitted-task">
-                ${task.value}
-            </label>
-            <button type="button" class="delete-btn">
-                Delete
-            </button>
-        </li>
-        `
+    if (task.value == "") return;
 
-        task.value = "";
-    }
+    taskList.innerHTML += `
+    <li class="task-item task-enter">
+        <input class="submitted-task" type="checkbox" name="submitted-task">
+        <label for="submitted-task">
+            ${task.value}
+        </label>
+        <button type="button" class="delete-btn">
+            Delete
+        </button>
+    </li>
+    `;
 
+    const newTask = taskList.lastElementChild;
+    setTimeout(() => {
+        newTask.classList.remove("task-enter");
+    },10);
+
+    task.value = "";
     task.focus();
+    characterCount.textContent = "0/30"
     updateInfoMessage();
 });
 
 taskList.addEventListener("click", (e) => {
     if(e.target.classList.contains("delete-btn")) {
-        e.target.closest("li").remove();
+        const li = e.target.closest("li");
+        li.classList.add("task-exit");
+
+        setTimeout(() => {
+            li.remove();
+            updateInfoMessage();
+        }, 300);
     }
 
     if(e.target.classList.contains("submitted-task")) {
