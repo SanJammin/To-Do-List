@@ -27,10 +27,8 @@ taskList.addEventListener("click", (e) => {
         e.target.closest("li").remove();
     }
 
-    if(e.target.classList.contains("submitted-task") && e.target.closest("li").classList.contains("completed")) {
-        e.target.closest("li").classList.remove("completed")
-    } else if(e.target.classList.contains("submitted-task")) {
-        e.target.closest("li").classList.add("completed");
+    if(e.target.classList.contains("submitted-task")) {
+        e.target.closest("li").classList.toggle("completed")
     }
 });
 
