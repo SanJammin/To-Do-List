@@ -26,6 +26,12 @@ taskList.addEventListener("click", (e) => {
     if(e.target.classList.contains("delete-btn")) {
         e.target.closest("li").remove();
     }
+
+    if(e.target.classList.contains("submitted-task") && e.target.closest("li").classList.contains("completed")) {
+        e.target.closest("li").classList.remove("completed")
+    } else if(e.target.classList.contains("submitted-task")) {
+        e.target.closest("li").classList.add("completed");
+    }
 });
 
 taskClearBtn.addEventListener("click", () => {
