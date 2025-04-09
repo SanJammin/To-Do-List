@@ -11,7 +11,10 @@
         <h1>What Do You Want To Do Today?</h1>
         <form>
             <label for="task">Please Enter A Task</label>
-            <input id="task" name="task" type="text" maxlength="30" required>
+            <div class="input-wrapper">
+                <input id="task" name="task" type="text" maxlength="30" required>
+                <p class="character-count" id="character-count">0/30</p>
+            </div>
             <button id="task-submit-btn" type="submit">Add Task</button>
         </form>
 

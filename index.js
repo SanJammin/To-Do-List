@@ -3,6 +3,7 @@ const taskSubmitBtn = document.getElementById("task-submit-btn");
 const taskList = document.getElementById("task-list");
 const taskClearBtn = document.getElementById("task-clear-btn");
 const info = document.getElementById("info");
+const characterCount = document.getElementById("character-count");
 
 function updateInfoMessage() {
     if (taskList.children.length === 0) {
@@ -49,6 +50,17 @@ taskList.addEventListener("click", (e) => {
     }
 
     updateInfoMessage();
+});
+
+task.addEventListener("input", () => {
+    const length = task.value.length;
+    characterCount.textContent = `${length}/30`;
+
+    if (length >= 25) {
+        characterCount.classList.add("warning");
+    } else {
+        characterCount.classList.remove("warning");
+    }
 });
 
 taskClearBtn.addEventListener("click", () => {
