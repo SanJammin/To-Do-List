@@ -132,3 +132,11 @@ button {
     text-decoration: line-through;
     color: #999;
 }
+
+.info {
+    text-align: center;
+    font-size: 1rem;
+    color: #888;
+    margin-top: 1rem;
+    font-style: italic;
+}

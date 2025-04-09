@@ -2,6 +2,17 @@ const task = document.getElementById("task");
 const taskSubmitBtn = document.getElementById("task-submit-btn");
 const taskList = document.getElementById("task-list");
 const taskClearBtn = document.getElementById("task-clear-btn");
+const info = document.getElementById("info");
+
+function updateInfoMessage() {
+    if (taskList.children.length === 0) {
+        info.textContent = "No Tasks Yet";
+    } else {
+        info.textContent = "";
+    }
+};
+
+updateInfoMessage();
 
 taskSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -25,6 +36,7 @@ taskSubmitBtn.addEventListener("click", (e) => {
     }
 
     task.focus();
+    updateInfoMessage();
 });
 
 taskList.addEventListener("click", (e) => {
@@ -35,9 +47,12 @@ taskList.addEventListener("click", (e) => {
     if(e.target.classList.contains("submitted-task")) {
         e.target.closest("li").classList.toggle("completed")
     }
+
+    updateInfoMessage();
 });
 
 taskClearBtn.addEventListener("click", () => {
     task.value = "";
     taskList.innerHTML = "";
+    updateInfoMessage();
 });

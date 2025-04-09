@@ -11,7 +11,7 @@
         <h1>What Do You Want To Do Today?</h1>
         <form>
             <label for="task">Please Enter A Task</label>
-            <input id="task" name="task" type="text" required>
+            <input id="task" name="task" type="text" maxlength="30" required>
             <button id="task-submit-btn" type="submit">Add Task</button>
         </form>
 
@@ -20,6 +20,8 @@
             
             </ul>
         </div>
+
+        <p class="info" id="info"></p>
 
         <button id="task-clear-btn" type="button">Clear All</button>
     </main>
