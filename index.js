@@ -6,19 +6,24 @@ const taskClearBtn = document.getElementById("task-clear-btn");
 taskSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    taskList.innerHTML += `
-    <li class="task-item">
-        <input class="submitted-task" type="checkbox" name="submitted-task">
-        <label for="submitted-task">
-            ${task.value}
-        </label>
-        <button type="button" class="delete-btn">
-            Delete
-        </button>
-    </li>
-    `
+    if (task.value == "") {
+        return
+    } else {
+        taskList.innerHTML += `
+        <li class="task-item">
+            <input class="submitted-task" type="checkbox" name="submitted-task">
+            <label for="submitted-task">
+                ${task.value}
+            </label>
+            <button type="button" class="delete-btn">
+                Delete
+            </button>
+        </li>
+        `
 
-    task.value = "";
+        task.value = "";
+    }
+
     task.focus();
 });
 
