@@ -7,7 +7,22 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
+    <main>
+        <h1>What Do You Want To Do Today?</h1>
+        <form>
+            <label for="task">Please Enter A Task</label>
+            <input id="task" name="task" type="text" required>
+            <button id="task-submit-btn" type="submit">Add Task</button>
+        </form>
+
+        <div class="tasks">
+            <ul id="task-list">
+            
+            </ul>
+        </div>
+
+        <button id="task-clear-btn" type="button">Clear All</button>
+    </main>
 
     <script src="index.js"></script>
 </body>
