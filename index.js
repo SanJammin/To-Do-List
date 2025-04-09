@@ -12,11 +12,20 @@ taskSubmitBtn.addEventListener("click", (e) => {
         <label for="submitted-task">
             ${task.value}
         </label>
+        <button type="button" class="delete-btn">
+            Delete
+        </button>
     </li>
     `
 
     task.value = "";
     task.focus();
+});
+
+taskList.addEventListener("click", (e) => {
+    if(e.target.classList.contains("delete-btn")) {
+        e.target.closest("li").remove();
+    }
 });
 
 taskClearBtn.addEventListener("click", () => {
